@@ -117,18 +117,23 @@ select sum(total_sale) as total_sales from sales;
 ```
 
 -- total quantity sold
+```sql
 select sum(quantiy) as total_quantity_sold from sales;
+```
 
 -- total unique customers
+```sql
 select count(distinct(customer_id)) as total_unique_customers from sales;
+```
 
 
 /* Write a SQL query to retrieve all transactions where the category is 'Clothing' and 
 the quantity sold is more or equal to 4 in the month of Nov-2022: */
-
+```sql
 select * from sales
 where category = 'Clothing' and quantiy >= 4 
 	and extract(month from sale_date) = 11 and extract (year from sale_date) = 2022;
+```
 
 
 select * from sales
@@ -138,19 +143,24 @@ and to_char(sale_date, 'mm - yyyy') = '11 - 2022';
 
 
 -- Write a SQL query to calculate the total sales (total_sale) and total_quantity_sold for each category.
+```sql
 select category, sum(quantiy) as total_quantity_sold , sum(total_sale) as net_sale
 from Sales 
 group by category
 order by net_sale desc;
+```
 
 
 /* Write a SQL query to find the average age of customers who purchased 
 items from the 'Beauty' category. */
+```sql
 select avg(age) as average_age from sales
 where category = 'Beauty';
+```
 
 
 /* Age Distribution Analysis: */
+```sql
 
 select min(age) from sales;
 
@@ -173,14 +183,18 @@ sum(s.quantiy) as "Total Quantity Sold",
 sum(total_sale) as "Net Sales Amount"
 from Sales as s join age_group as a on s.transactions_id = a.transactions_id
 group by Age_Group;
+```
 
 
 
 -- Write a SQL query to find all transactions where the total_sale is greater than 1000.
+```sql
 select * from sales 
 where total_sale > 1000;
+```
 
 -- Analysis of Top 10 Customers 
+```sql
 select customer_id, count(transactions_id) as "Total_Transactions_Count", 
                  	sum(quantiy) as  "Total_Quantity_Purchased " ,  
                    sum(total_sale) as "Total_Sales_Revenue_by_Customer"
@@ -188,19 +202,23 @@ from sales
 group by customer_id
 order by sum(total_sale) desc
 limit 10;
+```
 
 
 -- Customer Purchase Insights by Gender and Category
+```sql
 select gender, category,count(transactions_id) as "Total_Transactions_Count", 
                  	sum(quantiy) as  "Total_Quantity_Purchased " ,  
                    sum(total_sale) as "Total_Sales_Revenue_by_Customer"
 from sales
 group by gender,category
 order by sum(total_sale) desc;
+```
 
 
-/* Write a SQL query to calculate the average sale for each month. 
-Find out best selling month in each year: */
+* Write a SQL query to calculate the average sale for each month. 
+Find out best selling month in each year:
+```sql
 SELECT year,month,avg_sale
 FROM 
 (    SELECT 
@@ -212,17 +230,19 @@ FROM sales
 GROUP BY 1, 2
 ) as t1
 WHERE rank = 1
+```
 
 
 -- Write a SQL query to find the number of unique customers who purchased items from each category.
+```sql
 
 SELECT category, COUNT(DISTINCT(customer_id)) as unique_customers
 FROM sales
 GROUP BY category;
-
+```
 
 -- Time-Based Sales Performance Overview
-
+```sql
 WITH hourly_sale
 AS
 (
@@ -240,9 +260,11 @@ SELECT
 	sum(total_sale) as net_sale
 FROM hourly_sale
 GROUP BY shift;
+```
 
 
 -- profit analysis
+```sql
 with profit_analysis as (
 	select * , (total_sale - (quantiy * cogs )) as profit
 	from sales
@@ -252,14 +274,8 @@ select extract(year from sale_date) as year ,category,
     sum(total_sale) as "net_sale",
     round(sum(profit)) as "net profit" from profit_analysis
 	group by year , category;
-
-
-
-
-
-
-
 ```
+
 
 
 ## Findings
