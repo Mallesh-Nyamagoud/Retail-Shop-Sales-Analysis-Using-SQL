@@ -136,10 +136,11 @@ where category = 'Clothing' and quantiy >= 4
 	and extract(month from sale_date) = 11 and extract (year from sale_date) = 2022;
 ```
 
-
+```sql
 select * from sales
 where category = 'Clothing' and quantiy >= 4 
 and to_char(sale_date, 'mm - yyyy') = '11 - 2022';
+```
 
 
 
