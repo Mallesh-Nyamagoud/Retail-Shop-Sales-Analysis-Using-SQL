@@ -106,10 +106,11 @@ select * from sales
 where extract(month from sale_date) = 5 and extract (year from sale_date) = 2022;
 ```
 
-
+```sql
 SELECT *
 FROM Sales
 WHERE sale_date BETWEEN '2022-05-01' AND '2022-05-31';
+```
 
 -- total sales
 ```sql
