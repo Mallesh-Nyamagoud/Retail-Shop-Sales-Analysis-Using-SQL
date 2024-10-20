@@ -37,6 +37,8 @@ create table Sales (
 	cogs	float,
 	total_sale float
 	);
+```
+
 ### 2. Data Exploration & Cleaning
 
 - **Record Count**: Determine the total number of records in the dataset.
@@ -48,9 +50,11 @@ create table Sales (
 SELECT COUNT(*) FROM sales;
 SELECT COUNT(DISTINCT(customer_id)) FROM sales;
 SELECT DISTINCT(category) FROM sales;
+```
 
 
 -- check whether the columns contain null values
+``` sql
 select * from Sales
 where transactions_id is null
     or sale_date	is null
@@ -63,36 +67,44 @@ where transactions_id is null
 	or price_per_unit is null
 	or cogs	is null
 	or total_sale is null;
+```
       
 
--- Replace NULL with the average age for Age Column
+ -- Replace NULL with the average age for Age Column
+ ```sql
  update Sales
 	 set age = (select round( avg(age)) from Sales where age is not null)
      where age is null;
-
+```
 
 -- To maintain data integrity and ensure accurate calculations in reports and analysis
 -- Delete rows where any of the columns (quantity, price, or total_amount) contain NULL values
 
+```sql
 delete from Sales 
 	where quantiy	is null 
 	or price_per_unit is null
 	or cogs	is null
-	or total_sale is null;```
+	or total_sale is null;
+```
 
 ### 3. Data Analysis & Findings
 
 The following SQL queries were developed to answer specific business questions:
 
-```    
+
 -- Write a SQL query to retrieve all columns for sales made on particular day like'2022-11-05:
- select * from sales
+ ```sql
+select * from sales
 where sale_date = '2022-11-05';
+```
 
 
 --  Write a SQL query to retrieve all columns for sales made on particular month and year
+```sql
 select * from sales
 where extract(month from sale_date) = 5 and extract (year from sale_date) = 2022;
+```
 
 
 SELECT *
@@ -100,7 +112,9 @@ FROM Sales
 WHERE sale_date BETWEEN '2022-05-01' AND '2022-05-31';
 
 -- total sales
+```sql
 select sum(total_sale) as total_sales from sales;
+```
 
 -- total quantity sold
 select sum(quantiy) as total_quantity_sold from sales;
@@ -275,7 +289,7 @@ This project serves as a comprehensive introduction to SQL for data analysts, co
 3. **Run the Queries**: Use the SQL queries provided in the `analysis_queries.sql` file to perform your analysis.
 4. **Explore and Modify**: Feel free to modify the queries to explore different aspects of the dataset or answer additional business questions.
 
-## Author – Mallesh Nyamagoud
+## Author Â– Mallesh Nyamagoud
 
 This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, feedback, or would like to collaborate, feel free to get in touch!
 
