@@ -236,4 +236,4 @@ select extract(year from sale_date) as year ,category,
     round(sum(profit)) as "net profit" from profit_analysis
 	group by year , category;
 
--- End of Project
+-- Project Completes
